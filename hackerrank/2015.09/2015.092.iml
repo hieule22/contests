@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/2015.09.05 - Booking Hackathon" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/2015.09.19 - World Cup Semifinals" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/2015.09.20 - World Cup Semifinals" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/2015.09.23 - 101 Hack Sep 2015" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/2015.09.25 - Morgan Stanley Codeathon 2015" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/2015.09.26 - Morgan Stanley Codeathon 2015" isTestSource="false" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="Contests" />
+    <orderEntry type="library" name="CHelper" level="project" />
+  </component>
+</module>

@@ -1,0 +1,42 @@
+20 B - Kefa and Company
+6 SINGLE
+8 STANDARD
+-1
+8 STANDARD
+-1
+2
+0
+27 4 5
+75 5
+0 100
+150 20
+75 1
+
+4 100
+
+1
+1
+33 5 100
+0 7
+11 32
+99 10
+46 8
+87 54
+
+4 111
+
+1
+17 src/taskdirectory
+8 -Xmx256M
+4 Main
+19 taskdirectory.TaskB
+39 net.egork.chelper.checkers.TokenChecker
+0 
+0
+10 2015.09.22
+30 Codeforces Round #321 (Div. 2)
+1
+27 hieule.utils.io.InputReader
+19 java.io.PrintWriter
+0
+0

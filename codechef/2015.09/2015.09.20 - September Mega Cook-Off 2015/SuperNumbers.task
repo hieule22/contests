@@ -1,0 +1,30 @@
+12 SuperNumbers
+12 MULTI_NUMBER
+8 STANDARD
+9 input.txt
+8 STANDARD
+10 output.txt
+1
+0
+17 3
+2 3
+90 95
+12 21
+5 1
+0
+3
+1
+17 src/taskdirectory
+16 -Xmx256m -Xss64m
+4 Main
+26 taskdirectory.SuperNumbers
+39 net.egork.chelper.checkers.TokenChecker
+0 
+0
+10 2015.09.20
+28 September Mega Cook-Off 2015
+1
+27 hieule.utils.io.InputReader
+19 java.io.PrintWriter
+0
+0

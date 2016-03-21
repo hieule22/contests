@@ -1,0 +1,36 @@
+20 C - Marina and Vasya
+6 SINGLE
+8 STANDARD
+-1
+8 STANDARD
+-1
+2
+0
+12 3 2
+abc
+xyc
+
+3 ayd
+1
+1
+8 1 0
+c
+b
+
+3 -1
+
+1
+17 src/taskdirectory
+8 -Xmx256M
+4 Main
+19 taskdirectory.TaskC
+39 net.egork.chelper.checkers.TokenChecker
+0 
+0
+10 2015.10.06
+30 Codeforces Round #324 (Div. 2)
+1
+27 hieule.utils.io.InputReader
+19 java.io.PrintWriter
+0
+0

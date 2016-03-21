@@ -1,0 +1,33 @@
+18 FacilityExtraction
+6 SINGLE
+8 STANDARD
+9 input.txt
+8 STANDARD
+10 output.txt
+1
+0
+241 5
+wifi
+swimming pool
+garden
+beach
+tennis court
+Our hotel is a very luxurious one, we are committed to provide the best holiday, you can always relax on our private beach, we provide four amazing tennis courts. WIFI is available in all areas.
+23 beach
+tennis court
+wifi
+1
+17 src/taskdirectory
+16 -Xmx256m -Xss64m
+4 Main
+32 taskdirectory.FacilityExtraction
+39 net.egork.chelper.checkers.TokenChecker
+0 
+0
+10 2015.09.05
+17 Booking Hackathon
+1
+17 java.util.Scanner
+19 java.io.PrintWriter
+0
+0

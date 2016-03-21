@@ -1,0 +1,45 @@
+11 MagicSpells
+12 MULTI_NUMBER
+8 STANDARD
+9 input.txt
+8 STANDARD
+10 output.txt
+1
+0
+105 3
+3 3 3
+-5 -6 -1
+1 2
+0 1
+3 3 3
+-5 0 -1
+1 2
+0 1
+9 2 2
+2 2 -1 4 -3 2 10 1 8
+4 0
+4 1
+0 2
+0 3
+0 5
+2 6
+1 7
+1 8
+7 -1
+0
+23
+1
+17 src/taskdirectory
+16 -Xmx256m -Xss64m
+4 Main
+25 taskdirectory.MagicSpells
+39 net.egork.chelper.checkers.TokenChecker
+0 
+0
+10 2015.09.25
+29 Morgan Stanley Codeathon 2015
+1
+27 hieule.utils.io.InputReader
+19 java.io.PrintWriter
+0
+0

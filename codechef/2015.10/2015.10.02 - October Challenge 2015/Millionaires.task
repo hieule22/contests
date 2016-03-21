@@ -1,0 +1,39 @@
+12 Millionaires
+12 MULTI_NUMBER
+8 STANDARD
+9 input.txt
+8 STANDARD
+10 output.txt
+1
+0
+110 3
+5
+ABCDE
+EBCDA
+0 10 20 30 40 50
+4
+CHEF
+QUIZ
+4 3 2 1 0
+8
+ABBABAAB
+ABABABAB
+100 100 100 100 100 100 100 100 100
+8 30
+4
+100
+1
+17 src/taskdirectory
+16 -Xmx256m -Xss64m
+4 Main
+26 taskdirectory.Millionaires
+39 net.egork.chelper.checkers.TokenChecker
+0 
+0
+10 2015.10.02
+22 October Challenge 2015
+1
+27 hieule.utils.io.InputReader
+19 java.io.PrintWriter
+0
+0

@@ -1,0 +1,26 @@
+8 CODECRCK
+6 SINGLE
+8 STANDARD
+9 input.txt
+8 STANDARD
+10 output.txt
+1
+0
+9 1 1 5
+4 5
+7 0.28125
+1
+17 src/taskdirectory
+16 -Xmx256m -Xss64m
+4 Main
+22 taskdirectory.CODECRCK
+39 net.egork.chelper.checkers.TokenChecker
+0 
+0
+10 2015.09.07
+24 September Challenge 2015
+1
+17 java.util.Scanner
+19 java.io.PrintWriter
+0
+0

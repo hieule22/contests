@@ -1,0 +1,33 @@
+6 Stacks
+12 MULTI_NUMBER
+8 STANDARD
+9 input.txt
+8 STANDARD
+10 output.txt
+1
+0
+65 3
+6
+3 4 5 1 1 2
+10
+3 2 9 5 2 9 4 14 7 10
+8
+14 5 13 19 17 10 18 12
+35 3 1 1 2
+5 2 2 4 7 10 
+4 5 10 12 18 
+1
+17 src/taskdirectory
+16 -Xmx256m -Xss64m
+4 Main
+20 taskdirectory.Stacks
+39 net.egork.chelper.checkers.TokenChecker
+0 
+0
+10 2015.09.20
+28 September Mega Cook-Off 2015
+1
+27 hieule.utils.io.InputReader
+19 java.io.PrintWriter
+0
+0

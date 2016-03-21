@@ -1,0 +1,28 @@
+7 BANKROB
+12 MULTI_NUMBER
+8 STANDARD
+9 input.txt
+8 STANDARD
+10 output.txt
+1
+0
+13 2
+1 0.5
+2 0.5
+40 1000000000.0 0.0
+500000000.0 500000000.0
+1
+17 src/taskdirectory
+16 -Xmx256m -Xss64m
+4 Main
+21 taskdirectory.BANKROB
+39 net.egork.chelper.checkers.TokenChecker
+0 
+0
+10 2015.09.06
+24 September Challenge 2015
+1
+27 hieule.utils.io.InputReader
+19 java.io.PrintWriter
+0
+0
