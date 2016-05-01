@@ -1,78 +1,77 @@
 #include <stdio.h>
 #include <iostream>
-#include <unordered_set>
 #include <vector>
+#include <unordered_set>
 // #define TEST
 
 using namespace std;
 const int MAX_N = 1005;
-int n, bff[MAX_N];
+int n, parent[MAX_N];
+bool seen[MAX_N];
 
-int findLongest(int node, int avoid, vector<vector<int>> & aff)
+int getHeight(int node, const vector<vector<int> > & child)
 {
-	int res = 0;
-	for (int a : aff[node]) {
-		if (a != avoid)
-			res = max(res, 1 + findLongest(a, 0, aff));
+	seen[node] = true;
+	int result = 0;
+	for (int c : child[node]) {
+		if (parent[node] != c)
+			result = max(result, 1 + getHeight(c, child));
 	}
-	return res;
+	return result;
 }
 
-void solve(int testNumber)
+void solve(int test)
 {
 	cin >> n;
-	vector<vector<int>> aff;
-	aff.resize(n + 1);
+	vector<vector<int> > child;
+	child.resize(n + 1);
 	for (int i = 1; i <= n; i++) {
-		cin >> bff[i];
-		aff[bff[i]].push_back(i);
+		cin >> parent[i];
+		seen[i] = false;
+		child[parent[i]].push_back(i);
 	}
 
-	int res = 0;
-	for (int start = 1; start <= n; start++)
-	{
-		unordered_set<int> seen;
-		seen.insert(start);
-		int length = 1;
-		int next = bff[start];
-		while (seen.find(next) == seen.end())
-		{	
-			seen.insert(next);
-			length++;
-			next = bff[next];
+	int result = 0;
+	for (int start = 1; start <= n; start++) {
+		if (seen[start]) continue;
+		int frontier = start;
+		while (!seen[frontier]) {
+			seen[frontier] = true;
+			frontier = parent[frontier];
 		}
 
+		// A knot is found
 		int cnt;
-		if (bff[bff[next]] == next) {
-			cnt = length;
-			if (next != start) {
-				cnt += findLongest(start, 0, aff);
-				cnt += findLongest(bff[next], next, aff);
-			} else {
-				cnt += findLongest(start, bff[start], aff);
-				cnt += findLongest(bff[start], start, aff);
-			}
+		if (parent[parent[frontier]] == frontier) {
+			cnt = 2 + getHeight(frontier, child) + getHeight(parent[frontier], child);
 		} else {
 			cnt = 1;
-			int temp = next;
-			next = bff[next];
-			while (next != temp)
-			{
+			int temp = frontier;
+			int last = frontier;
+			frontier = parent[frontier];
+			while (frontier != temp) {
 				cnt++;
-				next = bff[next];
+				for (int c : child[frontier]) 
+					if (c != last)
+						getHeight(c, child);
+				last = frontier;
+				frontier = parent[frontier];
 			}
+			for (int c : child[temp])
+				if (c != last)
+					getHeight(c, child);
 		}
-
-		res = max(res, cnt);
+		result = max(result, cnt);
 	}
-	cout << "Case #" << testNumber << ": " << res << endl;
+
+	cout << "Case #" << test << ": " << result << endl;
 }
 
 int main()
 {
 	#ifndef TEST
-	freopen("C-small-attempt5.in", "r", stdin);
-	freopen("C-small-attempt5.out", "w", stdout);
+	freopen("C-small-practice.in", "r", stdin);
+	freopen("C-small-practice.out", "w", stdout);
 	#endif
 	ios_base::sync_with_stdio(0);
 
