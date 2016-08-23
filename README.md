@@ -1,4 +1,4 @@
-# contests
+# Contest Archive
 This repository contains a comprehensive archive for all the programming
 contests I have participated in. The listed codes are specifically written to
 suit the unique environment of a programming contest which prioritizes
