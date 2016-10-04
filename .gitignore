@@ -1,5 +1,10 @@
-# Emacs autosaves
+# Autosaves and temporary files.
 *~
+*#
 
-# Executables
+# Compiled sources.
 *.out
+*.class
+
+# OS generated files.
+.DS_STORE
