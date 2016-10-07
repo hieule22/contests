@@ -3,7 +3,8 @@
 *#
 
 # Compiled sources.
-*.out
+a.out
+*.o
 *.class
 
 # OS generated files.
