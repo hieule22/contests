@@ -9,12 +9,14 @@ problem solving and mastery of complex algorithms and data structures.
 
 Below are the list of online judges I have been part of:
 
-* [Google Code Jam](https://code.google.com/codejam/)
-
 * [Codeforces](http://codeforces.com/)
 
 * [CodeChef](http://codechef.com/)
 
+* [Google Code Jam](https://code.google.com/codejam/)
+
 * [HackerRank](https://www.hackerrank.com/)
 
 * [HackerEarth](https://www.hackerearth.com/)
+
+* [TopCoder](https://www.topcoder.com/)
