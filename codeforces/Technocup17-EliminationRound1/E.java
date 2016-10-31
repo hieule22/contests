@@ -3,11 +3,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.Arrays;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.StringTokenizer;
+import java.io.IOException;
 import java.io.BufferedReader;
 import java.util.Comparator;
+import java.io.InputStreamReader;
 import java.io.InputStream;
 
 /**
@@ -29,110 +29,128 @@ public class E {
 
     static class TaskE {
         public void solve(int testNumber, InputReader in, PrintWriter out) {
-            int n = in.nextInt();  // Number of games.
-            int k = in.nextInt();  // Length of game name.
-            String disk = in.next();
-            Integer[] orders = construct(disk, k);
+            int n = in.nextInt();
+            int k = in.nextInt();
+            char[] s = in.next().toCharArray();
+            Structure struct = new Structure(s, k);
 
-            int[] dict = new int[disk.length()];
-            Arrays.fill(dict, -1);
-            int g = in.nextInt();  // Number of choices.
+            int[] relation = new int[s.length];
+            Arrays.fill(relation, -1);
+            int g = in.nextInt();
             for (int i = 0; i < g; ++i) {
-                String gameName = in.next();
-                int low = getLowerBound(disk, orders, gameName);
-                int high = getUpperBound(disk, orders, gameName);
-                for (int j = low; j <= high; ++j)
-                    dict[orders[j]] = i;
+                char[] game = in.next().toCharArray();
+                int low = struct.getLower(game);
+                int high = struct.getHigher(game);
+                for (int j = low; j <= high; ++j) {
+                    relation[struct.getIndex(j)] = i;
+                }
             }
 
-            boolean[] seen = new boolean[g];
             for (int i = 0; i < k; ++i) {
-                Arrays.fill(seen, false);
-                int start = i;
-                boolean valid = true;
+                boolean[] seen = new boolean[g];
+                int current = i;
+                boolean unique = true;
                 for (int j = 0; j < n; ++j) {
-                    int index = dict[start];
-                    if (index == -1 || seen[index]) {
-                        valid = false;
+                    if (relation[current] < 0 || seen[relation[current]]) {
+                        unique = false;
                         break;
                     }
-                    seen[index] = true;
-                    start = (start + k) % disk.length();
+                    seen[relation[current]] = true;
+                    current = (current + k) % s.length;
                 }
-                if (valid) {
+                if (unique) {
                     out.println("YES");
-                    start = i;
+                    int start = i;
                     for (int j = 0; j < n; ++j) {
-                        out.printf("%d ", dict[start] + 1);
-                        start = (start + k) % disk.length();
+                        out.printf("%d ", relation[start] + 1);
+                        start = (start + k) % s.length;
                     }
+                    out.println();
                     return;
                 }
             }
+
             out.println("NO");
         }
 
-        private int getLowerBound(CharSequence s, Integer[] orders, String target) {
-            int low = 0, high = orders.length - 1;
-            while (low < high) {
-                int mid = low + (high - low) / 2;
-                if (compare(s, orders[mid], target) < 0)  // s[mid] < target
-                    low = mid + 1;
-                else  // s[mid] >= target
-                    high = mid;
-            }
-            return (compare(s, orders[low], target) == 0) ? low : Integer.MAX_VALUE;
-        }
+        private class Structure {
+            private Integer[] tree;
+            private int[][] ranks;
+            private char[] s;
 
-        private int getUpperBound(CharSequence s, Integer[] orders, String target) {
-            int low = 0, high = orders.length - 1;
-            while (low < high) {
-                int mid = low + (high - low + 1) / 2;
-                if (compare(s, orders[mid], target) > 0)  // s[mid] > target
-                    high = mid - 1;
-                else  // s[mid] <= target
-                    low = mid;
-            }
-            return (compare(s, orders[low], target) == 0) ? low : Integer.MIN_VALUE;
-        }
+            public Structure(char[] s, int k) {
+                this.s = s;
+                final int length = s.length;
+                final int maxPower = (int) Math.ceil(Math.log(k) / Math.log(2));
+                tree = new Integer[length];
+                ranks = new int[maxPower + 1][length];
 
-        private int compare(CharSequence a, int start, CharSequence b) {
-            for (int i = 0; i < b.length(); ++i) {
-                if (a.charAt(start) != b.charAt(i))
-                    return a.charAt(start) - b.charAt(i);
-                start = (start + 1) % a.length();
-            }
-            return 0;
-        }
+                for (int i = 0; i < length; ++i) {
+                    tree[i] = i;
+                    ranks[0][i] = s[i] - 'a';
+                }
 
-        private Integer[] construct(CharSequence s, int k) {
-            int limit = (int) Math.ceil(Math.log(k) / Math.log(2));
-            Integer[] result = new Integer[s.length()];
-            for (int i = 0; i < result.length; ++i)
-                result[i] = i;
-            int[][] ranks = new int[limit + 1][s.length()];
-            for (int i = 0; i < s.length(); ++i)
-                ranks[0][i] = s.charAt(i) - 'a';
-            Arrays.sort(result, (o1, o2) -> ranks[0][o1] - ranks[0][o2]);
+                for (int i = 1; i <= maxPower; ++i) {
+                    final int currentPower = i;
+                    Comparator<Integer> comparator = (a, b) -> {
+                        if (ranks[currentPower - 1][a] == ranks[currentPower - 1][b]) {
+                            a = (a + (1 << (currentPower - 1))) % length;
+                            b = (b + (1 << (currentPower - 1))) % length;
+                        }
 
-            for (int i = 1; i < ranks.length; ++i) {
-                final int currentPower = i;
-                Comparator<Integer> segmentComparator = (a, b) -> {
-                    if (ranks[currentPower - 1][a] == ranks[currentPower - 1][b]) {
-                        a = (a + (1 << (currentPower - 1))) % s.length();
-                        b = (b + (1 << (currentPower - 1))) % s.length();
+                        return ranks[currentPower - 1][a] - ranks[currentPower - 1][b];
+                    };
+                    Arrays.sort(tree, comparator);
+
+                    // Update ranks
+                    int currentRank = ranks[currentPower][tree[0]];
+                    for (int j = 1; j < length; ++j) {
+                        if (comparator.compare(tree[j], tree[j - 1]) != 0)
+                            ++currentRank;
+                        ranks[currentPower][tree[j]] = currentRank;
                     }
-                    return ranks[currentPower - 1][a] - ranks[currentPower - 1][b];
-                };
-                Arrays.sort(result, segmentComparator);
-                int currentRank = ranks[i][result[0]] = 0;
-                for (int j = 1; j < result.length; ++j) {
-                    if (segmentComparator.compare(j, j - 1) != 0)
-                        ++currentRank;
-                    ranks[i][result[j]] = currentRank;
                 }
             }
-            return result;
+
+            public int getIndex(int index) {
+                return tree[index];
+            }
+
+            public int getLower(char[] target) {
+                int low = 0, high = tree.length - 1;
+                while (low < high) {
+                    int mid = low + (high - low) / 2;
+                    if (compare(mid, target) >= 0)
+                        high = mid;
+                    else  // compare(mid, target) < 0
+                        low = mid + 1;
+                }
+                return compare(low, target) == 0 ? low : Integer.MAX_VALUE;
+            }
+
+            public int getHigher(char[] target) {
+                int low = 0, high = tree.length - 1;
+                while (low < high) {
+                    int mid = low + (high - low + 1) / 2;
+                    if (compare(mid, target) <= 0)
+                        low = mid;
+                    else  // compare(mid, target) > 0
+                        high = mid - 1;
+
+                }
+                return compare(low, target) == 0 ? low : Integer.MIN_VALUE;
+            }
+
+            private int compare(int index, char[] target) {
+                int start = tree[index];
+                for (char c : target) {
+                    if (s[start] != c)
+                        return s[start] - c;
+                    start = (start + 1) % s.length;
+                }
+                return 0;
+            }
+
         }
 
     }
